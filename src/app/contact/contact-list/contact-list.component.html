@@ -1,3 +1,17 @@
-<p>
-  contact-list works!
-</p>
+<mat-card>
+  <mat-card-content>
+    <h3 mat-subheader>Contacts</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let contact of contacts" class="mat-list-option">
+        <mat-icon mat-list-icon>person</mat-icon>
+        <h4 mat-line>{{contact.name}}</h4>
+        <span mat-line>{{contact.phoneNumber}}</span>
+        <span mat-line>{{contact.email}}</span>
+        <span mat-line>{{contact.address}}</span>
+        <button mat-mini-fab class="mat-pseudo-checkbox">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
