@@ -1,15 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { FormGroup, NgForm } from '@angular/forms';
+import { Contact } from 'src/app/core/models/contact';
 
 @Component({
   selector: 'app-contact-details',
   templateUrl: './contact-details.component.html',
   styleUrls: ['./contact-details.component.scss']
 })
-export class ContactDetailsComponent implements OnInit {
+export class ContactDetailsComponent {
+  selectedContact: Contact;
+  @Input() group: FormGroup;
+  @Input() set contact(value: Contact) {
+    this.selectedContact = value;
+  }
+  @Output() submitted = new EventEmitter();
+  @Output() cancelled = new EventEmitter();
 
-  constructor() { }
-
-  ngOnInit() {
+  submit(directive: NgForm) {
+    this.submitted.emit(this.group.value);
+    directive.resetForm();
   }
 
+  cancel() {
+    this.cancelled.emit();
+  }
 }

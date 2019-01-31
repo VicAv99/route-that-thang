@@ -1,13 +1,18 @@
 <div class="wrapper">
   <div class="list-grid">
 
-    <app-contact-list [contacts]="contacts$ | async">
+    <app-contact-list [contacts]="contacts$ | async"
+                      (selected)="selectContact($event)"
+                      (deleted)="removeContact($event)">
     </app-contact-list>
 
   </div>
 
   <div class="details-grid">
-    <app-contact-details>
+    <app-contact-details [group]="form"
+                          [contact]="contact"
+                          (submitted)="saveContact($event)"
+                          (cancelled)="reset()">
     </app-contact-details>
   </div>
 </div>
