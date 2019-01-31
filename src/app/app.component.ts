@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'route-that-thang';
+  title = 'Route That Thang!';
+  links: any[] = [
+    { path: '/login', label: 'Login' },
+    { path: '/contacts', label: 'Contacts' }
+  ];
 }
