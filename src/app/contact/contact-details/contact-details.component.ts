@@ -17,11 +17,17 @@ export class ContactDetailsComponent {
   @Output() cancelled = new EventEmitter();
 
   submit(directive: NgForm) {
-    this.submitted.emit(this.group.value);
-    directive.resetForm();
+    if (this.group.valid) {
+      this.submitted.emit(this.group.value);
+      directive.resetForm();
+    }
   }
 
   cancel() {
     this.cancelled.emit();
+  }
+
+  validateField(control: string, directive: NgForm) {
+    return this.group.get(control).invalid && directive.submitted;
   }
 }
