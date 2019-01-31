@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { AuthService } from '../core/auth/auth.service';
+import { NotifyService } from '../core/notify/notify.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private notifyService: NotifyService
   ) { }
 
   ngOnInit() {
@@ -31,6 +33,7 @@ export class LoginComponent implements OnInit {
     if (this.form.valid && verifiedUser ) {
       this.router.navigateByUrl('/contacts');
       this.authService.setToken(username);
+      this.notifyService.notify(`Welcome ${username}!`, 'woohoo!');
     }
   }
 

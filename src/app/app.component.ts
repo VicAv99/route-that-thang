@@ -11,13 +11,13 @@ export class AppComponent {
   title = 'Route That Thang!';
   authenticated = false;
   links: any[] = [
-    { path: '/login', label: 'Login' },
     { path: '/contacts', label: 'Contacts' }
   ];
 
-  constructor(private router: Router, public authService: AuthService) {
-    authService.setToken();
-  }
+  constructor(
+    private router: Router,
+    public authService: AuthService
+  ) { }
 
   routeToLogin() {
     this.router.navigateByUrl('/login');
