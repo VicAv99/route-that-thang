@@ -10,6 +10,7 @@ export class ContactListComponent {
   @Input() contacts: Contact[];
   @Output() selected = new EventEmitter();
   @Output() deleted = new EventEmitter();
+  @Output() navigateToContact = new EventEmitter();
 
   constructor() { }
 
@@ -19,5 +20,9 @@ export class ContactListComponent {
 
   remove(contactId: string) {
     this.deleted.emit(contactId);
+  }
+
+  viewContactDetails(contactId: any) {
+    this.navigateToContact.emit(contactId);
   }
 }

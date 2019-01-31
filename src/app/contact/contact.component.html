@@ -3,7 +3,8 @@
 
     <app-contact-list [contacts]="contacts$ | async"
                       (selected)="selectContact($event)"
-                      (deleted)="removeContact($event)">
+                      (deleted)="removeContact($event)"
+                      (navigateToContact)="navigateToContactDetails($event)">
     </app-contact-list>
 
   </div>

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Contact } from '../core/models/contact';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotifyService } from '../core/notify/notify.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contact',
@@ -18,7 +19,8 @@ export class ContactComponent implements OnInit {
   constructor(
     private contactsService: ContactsService,
     private formBuilder: FormBuilder,
-    private notifyService: NotifyService
+    private notifyService: NotifyService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -68,6 +70,10 @@ export class ContactComponent implements OnInit {
         this.getContacts();
         this.notifyService.notify('Contact removed...');
     });
+  }
+
+  navigateToContactDetails(contactId: any) {
+    this.router.navigate(['/contacts', contactId]);
   }
 
   reset() {
