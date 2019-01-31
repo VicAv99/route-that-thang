@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from './core/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +14,13 @@ export class AppComponent {
     { path: '/login', label: 'Login' },
     { path: '/contacts', label: 'Contacts' }
   ];
-  constructor(private router: Router) {
-    this.authenticated = !!localStorage.getItem('verified');
+
+  constructor(private router: Router, public authService: AuthService) {
+    authService.setToken();
   }
 
   routeToLogin() {
     this.router.navigateByUrl('/login');
+    this.authService.setToken();
   }
 }
