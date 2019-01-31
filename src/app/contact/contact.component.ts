@@ -3,6 +3,7 @@ import { ContactsService } from '../core/contacts/contacts.service';
 import { Observable } from 'rxjs';
 import { Contact } from '../core/models/contact';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NotifyService } from '../core/notify/notify.service';
 
 @Component({
   selector: 'app-contact',
@@ -16,8 +17,9 @@ export class ContactComponent implements OnInit {
 
   constructor(
     private contactsService: ContactsService,
-    private formBuilder: FormBuilder
-  ) { }
+    private formBuilder: FormBuilder,
+    private notifyService: NotifyService
+  ) {}
 
   ngOnInit() {
     this.getContacts();
@@ -39,26 +41,33 @@ export class ContactComponent implements OnInit {
 
   createContact(contact: Contact) {
     this.contactsService.create(contact)
-      .subscribe(res => {
-        this.reset();
-        this.getContacts();
-      });
-    }
+      .subscribe((res: Contact) => {
+        const message = `${res.name} has been Created!`;
 
-    updateContact(contact: Contact) {
-      this.contactsService.update(contact)
-      .subscribe(res => {
         this.reset();
         this.getContacts();
-      });
-    }
+        this.notifyService.notify(message, `${res.email}`);
+    });
+  }
 
-    removeContact(contactId: string) {
-      this.contactsService.delete(contactId)
+  updateContact(contact: Contact) {
+    this.contactsService.update(contact)
+      .subscribe((res: Contact) => {
+        const message = `${res.name} has been updated!`;
+
+        this.reset();
+        this.getContacts();
+        this.notifyService.notify(message, 'Thank you!');
+    });
+  }
+
+  removeContact(contactId: string) {
+    this.contactsService.delete(contactId)
       .subscribe(res => {
         this.reset();
         this.getContacts();
-      });
+        this.notifyService.notify('Contact removed...');
+    });
   }
 
   reset() {
@@ -72,8 +81,7 @@ export class ContactComponent implements OnInit {
       name: ['', Validators.compose([Validators.required])],
       phoneNumber: ['', Validators.compose([Validators.required])],
       email: ['', Validators.compose([Validators.required])],
-      address: ['', Validators.compose([Validators.required])],
+      address: ['', Validators.compose([Validators.required])]
     });
   }
-
 }
