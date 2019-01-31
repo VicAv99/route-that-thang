@@ -30,4 +30,8 @@ export class ContactDetailsComponent {
   validateField(control: string, directive: NgForm) {
     return this.group.get(control).invalid && directive.submitted;
   }
+
+  determineUpdate() {
+    return !!this.group.value.id;
+  }
 }
