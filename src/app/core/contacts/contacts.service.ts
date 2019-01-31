@@ -18,7 +18,7 @@ export class ContactsService {
 
   all$ = (): Observable<Contact[]> => this.http.get<Contact[]>(this.getUrl());
 
-  getContact = (contactId: string) => this.http.get(this.getUrlById(contactId));
+  getContact = (contactId: string): Observable<Contact> => this.http.get<Contact>(this.getUrlById(contactId));
 
   create = (contact: Contact) => this.http.post(this.getUrl(), contact);
 

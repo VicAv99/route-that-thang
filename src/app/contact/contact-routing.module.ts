@@ -4,13 +4,12 @@ import { ContactComponent } from './contact.component';
 import { ContactViewComponent } from './contact-view/contact-view.component';
 import { AuthGuardService } from '../core/auth/auth-guard.service';
 
-const routes: Route[] = [
-  {
-    path: 'contacts', component: ContactComponent, canActivate: [AuthGuardService], children: [
-      { path: ':id', component: ContactViewComponent, canActivate: [AuthGuardService] }
-    ]
-  }
-];
+const routes: Route[] = [{
+  path: 'contacts', canActivate: [AuthGuardService], children: [
+    { path: '', component: ContactComponent, canActivate: [AuthGuardService] },
+    { path: ':id', component: ContactViewComponent, canActivate: [AuthGuardService] }
+  ]
+}];
 
 @NgModule({
   imports: [

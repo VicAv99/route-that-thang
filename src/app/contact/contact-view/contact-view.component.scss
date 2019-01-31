@@ -1,0 +1,16 @@
+mat-card {
+  mat-card-actions {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 10px;
+    border-top: whitesmoke 1px solid;
+  }
+}
+
+.wrapper {
+  margin-top: 15px;
+  .view-grid {
+    grid-column: 5/9;
+    grid-row: 2;
+  }
+}

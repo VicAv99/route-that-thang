@@ -1,3 +1,24 @@
-<p>
-  contact-view works!
-</p>
+<div class="wrapper">
+  <div class="view-grid">
+    <mat-card *ngIf="contact$ | async as contact">
+      <mat-card-header>
+        <mat-card-title>{{contact.name}}</mat-card-title>
+        <mat-card-subtitle>{{contact.id}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p mat-line><strong>Address:</strong> {{contact.address}} </p>
+        <p mat-line><strong>Email:</strong> {{contact.email}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button type="button" color="primary"
+          (click)="randomNotify()">
+          Go Crazy!
+        </button>
+        <button mat-raised-button type="button" color="accent"
+          (click)="goBack()">
+          Back
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
